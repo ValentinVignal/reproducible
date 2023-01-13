@@ -179,20 +179,17 @@ type Mutation {
 
 input CreateOneTodoItemInput {
   """The record to create"""
-  todoItem: CreateTodoItem!
+  todoItem: TodoItemCreate!
 }
 
-input CreateTodoItem {
-  id: ID
-  title: String
-  completed: Boolean
-  created: DateTime
-  updated: DateTime
+input TodoItemCreate {
+  title: String!
+  completed: Boolean!
 }
 
 input CreateManyTodoItemsInput {
   """Array of records to create"""
-  todoItems: [CreateTodoItem!]!
+  todoItems: [TodoItemCreate!]!
 }
 
 input UpdateOneTodoItemInput {
@@ -200,15 +197,12 @@ input UpdateOneTodoItemInput {
   id: ID!
 
   """The update to apply."""
-  update: UpdateTodoItem!
+  update: TodoItemUpdate!
 }
 
-input UpdateTodoItem {
-  id: ID
+input TodoItemUpdate {
   title: String
   completed: Boolean
-  created: DateTime
-  updated: DateTime
 }
 
 input UpdateManyTodoItemsInput {
@@ -216,7 +210,7 @@ input UpdateManyTodoItemsInput {
   filter: TodoItemUpdateFilter!
 
   """The update to apply to all records found using the filter"""
-  update: UpdateTodoItem!
+  update: TodoItemUpdate!
 }
 
 input TodoItemUpdateFilter {
