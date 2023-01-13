@@ -1,2 +1,2 @@
-# reproductible
+# reproducible
 A repository to reproduce code.
