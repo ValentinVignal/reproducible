@@ -18,7 +18,7 @@ import { TodoItemModule } from './todo-item/todo-item.module';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       // set to true to automatically generate schema
-      autoSchemaFile: true,
+      autoSchemaFile: 'src/schema.gql',
       driver: ApolloDriver,
     }),
     TodoItemModule,
