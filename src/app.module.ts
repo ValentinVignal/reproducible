@@ -15,6 +15,7 @@ import { TodoItemModule } from './todo-item/todo-item.module';
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
+      port: 5433,
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       // set to true to automatically generate schema
