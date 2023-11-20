@@ -33,37 +33,20 @@ type UpdateManyResponse {
   updatedCount: Int!
 }
 
-type TodoItemEdge {
-  """The node containing the TodoItem"""
-  node: TodoItem!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-"""Cursor for paging through collections"""
-scalar ConnectionCursor
-
-type PageInfo {
+type OffsetPageInfo {
   """true if paging forward and there are more records."""
   hasNextPage: Boolean
 
   """true if paging backwards and there are more records."""
   hasPreviousPage: Boolean
-
-  """The cursor of the first returned record."""
-  startCursor: ConnectionCursor
-
-  """The cursor of the last returned record."""
-  endCursor: ConnectionCursor
 }
 
 type TodoItemConnection {
   """Paging information"""
-  pageInfo: PageInfo!
+  pageInfo: OffsetPageInfo!
 
-  """Array of edges."""
-  edges: [TodoItemEdge!]!
+  """Array of nodes."""
+  nodes: [TodoItem!]!
 }
 
 type Query {
@@ -73,7 +56,7 @@ type Query {
   ): TodoItem!
   todoItems(
     """Limit or page results."""
-    paging: CursorPaging! = {first: 10}
+    paging: OffsetPaging! = {limit: 10}
 
     """Specify to filter the records returned."""
     filter: TodoItemFilter! = {}
@@ -83,18 +66,12 @@ type Query {
   ): TodoItemConnection!
 }
 
-input CursorPaging {
-  """Paginate before opaque cursor"""
-  before: ConnectionCursor
+input OffsetPaging {
+  """Limit the number of records returned"""
+  limit: Int
 
-  """Paginate after opaque cursor"""
-  after: ConnectionCursor
-
-  """Paginate first"""
-  first: Int
-
-  """Paginate last"""
-  last: Int
+  """Offset to start returning records from"""
+  offset: Int
 }
 
 input TodoItemFilter {
@@ -183,11 +160,8 @@ input CreateOneTodoItemInput {
 }
 
 input CreateTodoItem {
-  id: ID
-  title: String
-  completed: Boolean
-  created: DateTime
-  updated: DateTime
+  title: String!
+  completed: Boolean!
 }
 
 input CreateManyTodoItemsInput {
